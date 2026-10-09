@@ -1,0 +1,174 @@
+/* Автор: Кліщ Юрій, група ІА-401 (klishchyuriy) */
+/* Шрифти лежать у папці fonts, тому сайт працює і без інтернету */
+@font-face { font-family: 'Ruslan Display'; src: url('fonts/ruslan.woff2') format('woff2'); }
+@font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-500.woff2') format('woff2'); font-weight: 500; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-700.woff2') format('woff2'); font-weight: 700; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('fonts/cormorant-500i.woff2') format('woff2'); font-weight: 500; font-style: italic; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #d9d6d0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='1' cy='1' r='.6' fill='%23c4bfb6'/%3E%3C/svg%3E");
+  font-family: 'Cormorant Garamond', 'Book Antiqua', Georgia, serif;
+  color: #3b2314;
+  font-weight: 500;
+  min-height: 100vh;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 720px 1fr;
+  gap: 40px;
+  padding: 50px 20px;
+  align-items: start;
+}
+
+/* Сторінка книги */
+.page {
+  grid-column: 2;
+  background: #f6eedc;
+  border: 3px solid #2b1a0e;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(40, 25, 10, .35);
+  animation: pageIn .6s ease both;
+}
+.page-inner {
+  border: 4px double #a67c2e;
+  padding: 40px 50px 30px;
+  min-height: 900px;
+}
+
+.num {
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a67c2e;
+}
+h2 {
+  text-align: center;
+  font-size: 34px;
+  color: #7a1e14;
+  margin: 6px 0 4px;
+}
+.orn {
+  text-align: center;
+  color: #a67c2e;
+  font-size: 20px;
+  letter-spacing: 10px;
+  margin-bottom: 22px;
+}
+
+p {
+  font-size: 22px;
+  line-height: 1.6;
+  text-align: justify;
+  text-indent: 1.5em;
+  margin-bottom: 12px;
+}
+
+/* Декоративний ініціал */
+.initial::first-letter {
+  float: left;
+  font-family: 'Ruslan Display', 'Cormorant Garamond', serif;
+  font-size: 92px;
+  line-height: .85;
+  color: #7a1e14;
+  padding: 10px 14px 6px;
+  margin: 4px 12px 0 0;
+  border: 2px solid #a67c2e;
+  background: #fbf3df;
+  box-shadow: inset 0 0 0 4px #f6eedc, inset 0 0 0 5px #a67c2e;
+}
+.initial { text-indent: 0; }
+
+.pic {
+  margin-top: 22px;
+  border: 1px solid #a67c2e;
+  padding: 6px;
+  background: #fffaf0;
+}
+.pic img { display: block; width: 100%; }
+
+.foot {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 16px;
+  font-style: italic;
+  color: #a67c2e;
+}
+
+/* Обкладинка */
+.cover .page-inner { padding: 0; border: none; min-height: 0; position: relative; }
+.cover img { display: block; width: 100%; border-radius: 4px; }
+.cover-title {
+  position: absolute;
+  top: 9%;
+  left: 0; right: 0;
+  text-align: center;
+}
+.cover-title small {
+  display: block;
+  font-size: 17px;
+  letter-spacing: 5px;
+  color: #7a5320;
+  font-weight: 700;
+}
+.cover-title h1 {
+  font-family: 'Ruslan Display', 'Cormorant Garamond', serif;
+  font-size: 66px;
+  font-weight: normal;
+  color: #a3241a;
+  text-shadow: 2px 2px 0 #f3e2b4, 3px 4px 6px rgba(80, 40, 10, .35);
+  margin-top: 8px;
+}
+
+/* Кнопки */
+.btn {
+  display: inline-block;
+  padding: 12px 34px;
+  min-width: 190px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 30px;
+  color: #2b1a0e;
+  text-decoration: none;
+  background: #fff;
+  border: 3px solid #2b1a0e;
+  border-radius: 22px;
+  transition: .2s;
+}
+.btn:hover { background: #7a1e14; color: #f6eedc; border-color: #7a1e14; }
+.left { grid-column: 1; justify-self: end; }
+.right { grid-column: 3; justify-self: start; }
+
+/* Анімація перегортання */
+@keyframes pageIn {
+  from { opacity: 0; transform: translateX(40px) rotateY(-8deg); }
+  to   { opacity: 1; transform: none; }
+}
+.leaving .page { animation: pageOut .35s ease forwards; }
+@keyframes pageOut {
+  to { opacity: 0; transform: translateX(-40px) rotateY(8deg); }
+}
+
+@media (max-width: 1150px) {
+  .wrap { grid-template-columns: 1fr 1fr; }
+  .page { grid-column: 1 / 3; grid-row: 2; }
+  .left { grid-column: 1; grid-row: 1; justify-self: start; }
+  .right { grid-column: 2; grid-row: 1; justify-self: end; }
+  .page-inner { padding: 24px; min-height: 0; }
+}
+
+/* Підпис автора */
+.author {
+  text-align: center;
+  padding: 0 0 30px;
+  font-size: 19px;
+  font-style: italic;
+  color: #7a5320;
+  letter-spacing: 1px;
+}
+.author b { font-weight: 700; color: #7a1e14; font-style: normal; }
